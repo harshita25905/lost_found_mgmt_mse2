@@ -18,7 +18,7 @@ const Register = ({ setUser }) => {
     setError('');
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/register', formData);
+      const res = await axios.post('https://lost-found-mgmt-mse2.onrender.com/api/register', formData);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
       setUser(res.data.user);
@@ -36,48 +36,48 @@ const Register = ({ setUser }) => {
       <div className="auth-card glass glass-card">
         <h2>Create Account</h2>
         <p className="auth-subtitle">Join our campus community</p>
-        
+
         {error && <div className="error-message">{error}</div>}
-        
+
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Full Name</label>
-            <input 
-              type="text" 
-              name="name" 
-              placeholder="John Doe" 
-              value={formData.name} 
-              onChange={handleChange} 
-              required 
+            <input
+              type="text"
+              name="name"
+              placeholder="John Doe"
+              value={formData.name}
+              onChange={handleChange}
+              required
             />
           </div>
           <div className="form-group">
             <label>Email Address</label>
-            <input 
-              type="email" 
-              name="email" 
-              placeholder="john@college.edu" 
-              value={formData.email} 
-              onChange={handleChange} 
-              required 
+            <input
+              type="email"
+              name="email"
+              placeholder="john@college.edu"
+              value={formData.email}
+              onChange={handleChange}
+              required
             />
           </div>
           <div className="form-group">
             <label>Password</label>
-            <input 
-              type="password" 
-              name="password" 
-              placeholder="••••••••" 
-              value={formData.password} 
-              onChange={handleChange} 
-              required 
+            <input
+              type="password"
+              name="password"
+              placeholder="••••••••"
+              value={formData.password}
+              onChange={handleChange}
+              required
             />
           </div>
           <button type="submit" className="auth-btn" disabled={loading}>
             {loading ? 'Creating Account...' : 'Register'}
           </button>
         </form>
-        
+
         <p className="auth-footer">
           Already have an account? <Link to="/login">Login here</Link>
         </p>

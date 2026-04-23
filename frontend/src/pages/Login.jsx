@@ -18,7 +18,7 @@ const Login = ({ setUser }) => {
     setError('');
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/login', formData);
+      const res = await axios.post('https://lost-found-mgmt-mse2.onrender.com/api/login', formData);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
       setUser(res.data.user);
@@ -35,37 +35,37 @@ const Login = ({ setUser }) => {
       <div className="auth-card glass glass-card">
         <h2>Welcome Back</h2>
         <p className="auth-subtitle">Login to manage your items</p>
-        
+
         {error && <div className="error-message">{error}</div>}
-        
+
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Email Address</label>
-            <input 
-              type="email" 
-              name="email" 
-              placeholder="name@example.com" 
-              value={formData.email} 
-              onChange={handleChange} 
-              required 
+            <input
+              type="email"
+              name="email"
+              placeholder="name@example.com"
+              value={formData.email}
+              onChange={handleChange}
+              required
             />
           </div>
           <div className="form-group">
             <label>Password</label>
-            <input 
-              type="password" 
-              name="password" 
-              placeholder="••••••••" 
-              value={formData.password} 
-              onChange={handleChange} 
-              required 
+            <input
+              type="password"
+              name="password"
+              placeholder="••••••••"
+              value={formData.password}
+              onChange={handleChange}
+              required
             />
           </div>
           <button type="submit" className="auth-btn" disabled={loading}>
             {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
-        
+
         <p className="auth-footer">
           Don't have an account? <Link to="/register">Register here</Link>
         </p>

@@ -23,9 +23,9 @@ const Dashboard = () => {
   const fetchItems = async (query = '') => {
     setLoading(true);
     try {
-      const url = query 
-        ? `http://localhost:5000/api/items/search?name=${query}`
-        : 'http://localhost:5000/api/items';
+      const url = query
+        ? `https://lost-found-mgmt-mse2.onrender.com/api/items/search?name=${query}`
+        : 'https://lost-found-mgmt-mse2.onrender.com/api/items';
       const res = await axios.get(url);
       setItems(res.data);
     } catch (err) {
@@ -53,9 +53,9 @@ const Dashboard = () => {
     try {
       const config = { headers: { Authorization: `Bearer ${token}` } };
       if (editItem) {
-        await axios.put(`http://localhost:5000/api/items/${editItem._id}`, formData, config);
+        await axios.put(`https://lost-found-mgmt-mse2.onrender.com/api/items/${editItem._id}`, formData, config);
       } else {
-        await axios.post('http://localhost:5000/api/items', formData, config);
+        await axios.post('https://lost-found-mgmt-mse2.onrender.com/api/items', formData, config);
       }
       setFormData({ itemName: '', description: '', type: 'Lost', location: '', contactInfo: '' });
       setShowForm(false);
@@ -70,7 +70,7 @@ const Dashboard = () => {
     if (window.confirm('Are you sure you want to delete this item?')) {
       try {
         const config = { headers: { Authorization: `Bearer ${token}` } };
-        await axios.delete(`http://localhost:5000/api/items/${id}`, config);
+        await axios.delete(`https://lost-found-mgmt-mse2.onrender.com/api/items/${id}`, config);
         fetchItems();
       } catch (err) {
         console.error('Error deleting item', err);
@@ -95,9 +95,9 @@ const Dashboard = () => {
       <header className="dashboard-header">
         <div className="search-bar glass">
           <FiSearch className="search-icon" />
-          <input 
-            type="text" 
-            placeholder="Search items by name..." 
+          <input
+            type="text"
+            placeholder="Search items by name..."
             value={search}
             onChange={handleSearch}
           />
@@ -156,7 +156,7 @@ const Dashboard = () => {
             </div>
             <h4>{item.itemName}</h4>
             <p className="item-desc">{item.description}</p>
-            
+
             <div className="item-details">
               <span><FiMapPin /> {item.location}</span>
               <span><FiCalendar /> {new Date(item.date).toLocaleDateString()}</span>
